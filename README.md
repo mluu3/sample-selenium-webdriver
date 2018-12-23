@@ -1,4 +1,4 @@
-# Welcome to Arquillian Test Project - Author By Minh Luu
+# Welcome to Arquillian Test Sample Project
 
 This maven project consists of following technologies/frameworks:
  - TestNG
