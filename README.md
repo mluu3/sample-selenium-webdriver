@@ -1,4 +1,4 @@
-# Welcome to Graphene Test
+# Welcome to Arquillian Test Project - Author By Minh Luu
 
 This maven project consists of following technologies/frameworks:
  - TestNG
