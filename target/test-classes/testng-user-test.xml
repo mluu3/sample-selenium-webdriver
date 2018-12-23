@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Interview_Tests">
+    <test name="User-Test">
+        <classes>
+            <class name="test.java.Test.UserTest" />
+        </classes>
+    </test>
+    <test name="Login-Test">
+        <classes>
+            <class name="test.java.Test.LoginTest"/>
+        </classes>
+    </test>
+</suite>
