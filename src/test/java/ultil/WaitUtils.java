@@ -1,4 +1,4 @@
-package test.java.Ultil;
+package test.java.ultil;
 
 import org.jboss.arquillian.graphene.Graphene;
 import org.openqa.selenium.By;
@@ -6,7 +6,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-import test.java.Fragment.AbstractFragment;
+import test.java.abstracts.AbstractFragment;
 
 import java.io.File;
 import java.util.Collection;

@@ -3,7 +3,7 @@ package test.java.abstracts;
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.testng.Arquillian;
 import org.openqa.selenium.WebDriver;
-import test.java.Ultil.BrowserUtils;
+import test.java.ultil.BrowserUtils;
 
 import java.util.logging.Logger;
 

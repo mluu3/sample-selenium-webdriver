@@ -1,14 +1,15 @@
-package test.java.Fragment;
+package test.java.fragment;
 
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.name;
-import static test.java.Ultil.ElementUtils.isElementVisible;
-import static test.java.Ultil.WaitUtils.waitForElementVisible;
+import static test.java.ultil.ElementUtils.isElementVisible;
+import static test.java.ultil.WaitUtils.waitForElementVisible;
 
 import org.jboss.arquillian.graphene.Graphene;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import test.java.abstracts.AbstractFragment;
 
 public class DepositPage extends AbstractFragment {
 

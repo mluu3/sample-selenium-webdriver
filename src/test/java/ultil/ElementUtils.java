@@ -1,7 +1,7 @@
-package test.java.Ultil;
+package test.java.ultil;
 
 import static java.util.stream.Collectors.toList;
-import static test.java.Ultil.WaitUtils.waitForElementVisible;
+import static test.java.ultil.WaitUtils.waitForElementVisible;
 
 import org.jboss.arquillian.graphene.Graphene;
 import org.openqa.selenium.By;

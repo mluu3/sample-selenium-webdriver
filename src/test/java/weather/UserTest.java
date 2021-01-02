@@ -1,18 +1,18 @@
-package test.java.Test;
+package test.java.weather;
 
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import test.java.Fragment.AccountCreateMessagePage;
-import test.java.Fragment.ConfirmationCustomerPage;
-import test.java.Fragment.ConfirmationDepositPage;
-import test.java.Fragment.DepositPage;
-import test.java.Fragment.NewAccountPage;
-import test.java.Fragment.NewAccountPage.AccountType;
-import test.java.Fragment.NewCustomerPage;
-import test.java.Fragment.NewCustomerPage.Gender;
+import test.java.fragment.AccountCreateMessagePage;
+import test.java.fragment.ConfirmationCustomerPage;
+import test.java.fragment.ConfirmationDepositPage;
+import test.java.fragment.DepositPage;
+import test.java.fragment.NewAccountPage;
+import test.java.fragment.NewAccountPage.AccountType;
+import test.java.fragment.NewCustomerPage;
+import test.java.fragment.NewCustomerPage.Gender;
 import test.java.abstracts.AbstractProjectTest;
 
 import java.util.Random;

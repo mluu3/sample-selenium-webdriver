@@ -1,4 +1,4 @@
-package test.java.Test;
+package test.java.weather;
 
 import org.testng.annotations.Test;
 import test.java.abstracts.AbstractProjectTest;

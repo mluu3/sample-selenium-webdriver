@@ -1,10 +1,10 @@
 package test.java.abstracts;
 
 import org.json.JSONException;
-import test.java.Fragment.DepositPage;
-import test.java.Fragment.LoginFragment;
-import test.java.Fragment.NewAccountPage;
-import test.java.Fragment.NewCustomerPage;
+import test.java.fragment.DepositPage;
+import test.java.fragment.LoginFragment;
+import test.java.fragment.NewAccountPage;
+import test.java.fragment.NewCustomerPage;
 
 public abstract class AbstractUITest extends AbstractTest {
 

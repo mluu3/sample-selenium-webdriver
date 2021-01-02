@@ -1,4 +1,4 @@
-package test.java.Fragment;
+package test.java.abstracts;
 
 import static java.util.Objects.isNull;
 

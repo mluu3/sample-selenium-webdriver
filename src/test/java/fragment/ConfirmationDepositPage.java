@@ -1,11 +1,12 @@
-package test.java.Fragment;
+package test.java.fragment;
 
 import static org.openqa.selenium.By.cssSelector;
 import static org.openqa.selenium.By.name;
-import static test.java.Ultil.WaitUtils.waitForElementVisible;
+import static test.java.ultil.WaitUtils.waitForElementVisible;
 
 import org.jboss.arquillian.graphene.Graphene;
 import org.openqa.selenium.SearchContext;
+import test.java.abstracts.AbstractFragment;
 
 public class ConfirmationDepositPage extends AbstractFragment {
 

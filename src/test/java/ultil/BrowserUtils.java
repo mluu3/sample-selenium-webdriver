@@ -1,4 +1,4 @@
-package test.java.Ultil;
+package test.java.ultil;
 
 import org.jboss.arquillian.drone.api.annotation.Default;
 import org.jboss.arquillian.graphene.context.GrapheneContext;

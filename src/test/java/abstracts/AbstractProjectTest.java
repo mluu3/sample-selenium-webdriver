@@ -1,6 +1,6 @@
 package test.java.abstracts;
 
-import static test.java.Ultil.BrowserUtils.getCurrentBrowserAgent;
+import static test.java.ultil.BrowserUtils.getCurrentBrowserAgent;
 
 import org.json.JSONException;
 import org.openqa.selenium.Dimension;

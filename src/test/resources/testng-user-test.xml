@@ -2,12 +2,12 @@
 <suite name="Interview_Tests">
     <test name="User-Test">
         <classes>
-            <class name="test.java.Test.UserTest" />
+            <class name="test.java.weather.UserTest" />
         </classes>
     </test>
     <test name="Login-Test">
         <classes>
-            <class name="test.java.Test.LoginTest"/>
+            <class name="test.java.weather.LoginTest"/>
         </classes>
     </test>
 </suite>
