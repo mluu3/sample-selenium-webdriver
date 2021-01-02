@@ -3,7 +3,7 @@
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <extension qualifier="webdriver">
-        <property name="browser">chrome</property>
-        <!--<property name="firefoxDriverBinary">${firefoxDriverBinaryPath}</property>-->
+        <property name="browser">firefox</property>
+        <property name="firefoxDriverBinary">${firefoxDriverBinaryPath}</property>
     </extension>
 </arquillian>

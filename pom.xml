@@ -14,45 +14,189 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>8</source>
-                    <target>8</target>
+                    <source>${targetJdk}</source>
+                    <target>${targetJdk}</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.19.1</version>
+                <version>${version.org.apache.maven.surefire-plugin}</version>
                 <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
-                    <!-- Suite testng xml file to consider for test execution -->
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng-user-test.xml</suiteXmlFile>
-                    </suiteXmlFiles>
-                    <properties>
-                        <property>
-                            <name>testnames</name>
-                            <value>${selectedTests}</value>
-                        </property>
-                    </properties>
+                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
     </build>
 
+    <profiles>
+        <profile>
+            <id>selenium</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-compiler-plugin</artifactId>
+                            <version>3.3</version>
+                            <configuration>
+                                <source>${targetJdk}</source>
+                                <target>${targetJdk}</target>
+                            </configuration>
+                        </plugin>
+                        <plugin>
+                            <groupId>org.apache.maven.plugins</groupId>
+                            <artifactId>maven-surefire-plugin</artifactId>
+                            <configuration>
+                                <argLine>-Xmx1024m</argLine>
+                            </configuration>
+                            <executions>
+                                <execution>
+                                    <id>surefire-tests</id>
+                                    <phase>integration-test</phase>
+                                    <goals>
+                                        <goal>test</goal>
+                                    </goals>
+                                    <configuration>
+                                        <skip>${skipTests}</skip>
+                                        <testFailureIgnore>${ignoreFailedTests}</testFailureIgnore>
+                                        <failIfNoTests>false</failIfNoTests>
+                                        <suiteXmlFiles>
+                                            <suiteXmlFile>src/test/resources/${testng.suite.xml}</suiteXmlFile>
+                                        </suiteXmlFiles>
+                                        <systemProperties>
+                                            <property>
+                                                <name>browser</name>
+                                                <value>${browser}</value>
+                                            </property>
+                                            <property>
+                                                <name>screenResolution</name>
+                                                <value>${screenResolution}</value>
+                                            </property>
+                                            <property>
+                                                <name>chromeDriverBinaryPath</name>
+                                                <value>${chromeDriverBinaryPath}</value>
+                                            </property>
+                                            <property>
+                                                <name>firefoxDriverBinaryPath</name>
+                                                <value>${firefoxDriverBinaryPath}</value>
+                                            </property>
+                                            <property>
+                                                <name>timeout</name>
+                                                <value>${timeout}</value>
+                                            </property>
+                                            <property>
+                                                <name>user.home</name>
+                                                <value>${project.build.directory}</value>
+                                            </property>
+                                            <property>
+                                                <name>file.separator</name>
+                                                <value>${file.separator}</value>
+                                            </property>
+                                            <property>
+                                                <name>arquillian.xml</name>
+                                                <value>${arquillian.xml}</value>
+                                            </property>
+                                            <property>
+                                                <name>test.execution.env</name>
+                                                <value>${test.execution.env}</value>
+                                            </property>
+                                        </systemProperties>
+                                    </configuration>
+                                </execution>
+                            </executions>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
+        <profile>
+            <id>local-firefox</id>
+            <activation>
+                <property>
+                    <name>test.execution.env</name>
+                    <value>local-firefox</value>
+                </property>
+            </activation>
+            <properties>
+                <arquillian.xml>arquillian.xml</arquillian.xml>
+                <browser>firefox</browser>
+            </properties>
+        </profile>
+        <profile>
+            <id>local-chrome</id>
+            <activation>
+                <property>
+                    <name>test.execution.env</name>
+                    <value>local-chrome</value>
+                </property>
+            </activation>
+            <properties>
+                <arquillian.xml>arquillian-local-chrome.xml</arquillian.xml>
+                <browser>chrome</browser>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>video</id>
+            <activation>
+                <property>
+                    <name>video.recording</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <dependencies>
+                <!-- Arquillian extension for video recording -->
+                <dependency>
+                    <groupId>org.jboss.arquillian.extension</groupId>
+                    <artifactId>arquillian-screen-recorder</artifactId>
+                    <version>${version.org.jboss.arquillian.ext.screenrecorder}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>windows</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <file.separator>\\</file.separator>
+            </properties>
+        </profile>
+    </profiles>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <targetJdk>1.8</targetJdk>
         <ignoreFailedTests>true</ignoreFailedTests>
 
         <skipTests>false</skipTests>
         <arquillian.xml>arquillian.xml</arquillian.xml>
+        <browser>firefox</browser>
+        <firefoxDriverBinaryPath>/usr/bin/geckodriver</firefoxDriverBinaryPath>
 
+        <screenResolution>fullscreen</screenResolution>
+
+<!--        <chromeDriverBinaryPath>/usr/bin/chromium-browser</chromeDriverBinaryPath>-->
+        <!-- (seconds) -->
+        <timeout>90</timeout>
+        <!-- possible values are: local-firefox/local-chrome -->
+        <test.execution.env>local-firefox</test.execution.env>
+        <testng.suite.xml>testng-basic.xml</testng.suite.xml>
         <version.org.jboss.arquillian>1.1.15.Final</version.org.jboss.arquillian>
         <version.org.jboss.arquillian.drone>2.5.1</version.org.jboss.arquillian.drone>
         <version.org.jboss.arquillian.graphene>2.3.2</version.org.jboss.arquillian.graphene>
         <version.org.jboss.arquillian.graphene2>2.3.2</version.org.jboss.arquillian.graphene2>
+        <version.org.jboss.arquillian.ext.screenrecorder>1.0.0.Alpha1</version.org.jboss.arquillian.ext.screenrecorder>
         <version.org.seleniumhq.selenium>3.11.0</version.org.seleniumhq.selenium>
+        <version.org.apache.maven.surefire-plugin>2.19.1</version.org.apache.maven.surefire-plugin>
         <version.org.testng>6.9.10</version.org.testng>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
