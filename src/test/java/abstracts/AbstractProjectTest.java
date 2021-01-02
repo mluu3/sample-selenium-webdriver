@@ -1,14 +1,20 @@
 package test.java.abstracts;
 
-import static test.java.Ultil.BrowserUtils.getCurrentBrowserAgent;
+import static test.java.ultil.BrowserUtils.getCurrentBrowserAgent;
 
 import org.json.JSONException;
 import org.openqa.selenium.Dimension;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import test.java.ultil.RestClient;
+import test.java.ultil.RestClient.RestProfile;
 
-public abstract  class AbstractProjectTest extends AbstractUITest {
+import java.util.Objects;
+
+public abstract class AbstractProjectTest extends AbstractUITest {
+
+    private RestClient restClient;
 
     @Test(groups = {"createProject"})
     @Parameters({"windowSize"})
@@ -20,17 +26,26 @@ public abstract  class AbstractProjectTest extends AbstractUITest {
 
         // adjust window size to run on mobile mode
         if (!windowSize.equals("maximize")) adjustWindowSize(windowSize);
-
-        // sign in with admin user
-        signIn("mngr169304", "YqUdeje");
     }
 
     protected void initProperties() {
         // should be implemented later in abstract test or test classes
     }
 
+    //This is a basic test therefore don't need security and user as public
+    protected RestClient getRestClient() {
+        // if rest client is not created yet or the user of current rest client and the current admin user
+        // is not the same, need to create new rest client
+        if (Objects.isNull(restClient)) {
+            log.info("Creating new rest client for current user: " + "luuthanhquocminh@gmail.com");
+            restClient = new RestClient(
+                    new RestProfile(
+                            "api.openweathermap.org", "luuthanhquocminh@gmail.com", "Minh2708"));
+        }
+        return restClient;
+    }
+
     private void adjustWindowSize(String windowSize) {
-        // this is now using for ui-tests-dashboards only
         // if having wide use, we should consider dimension properties
         // drone definition: http://arquillian.org/arquillian-extension-drone/#webdriver-configuration (see property named dimensions)
         // e.g.: https://github.com/arquillian/arquillian-extension-drone/blob/master/drone-webdriver/src/test/resources/arquillian.xml#L31
