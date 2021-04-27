@@ -2,11 +2,24 @@ package test.java.abstracts;
 
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.testng.Arquillian;
+import org.json.JSONException;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import test.java.ultil.BrowserUtils;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
+import test.java.ultil.RestClient;
+import test.java.ultil.testng.listener.AuxiliaryFailureScreenshotListener;
+import test.java.ultil.testng.listener.ConsoleStatusListener;
+import test.java.ultil.testng.listener.FailureLoggingListener;
 
+import java.util.Objects;
 import java.util.logging.Logger;
 
+import static test.java.ultil.BrowserUtils.getCurrentBrowserAgent;
+
+@Listeners({ConsoleStatusListener.class, FailureLoggingListener.class, AuxiliaryFailureScreenshotListener.class})
 public abstract class AbstractTest extends Arquillian {
 
     @Drone
@@ -14,34 +27,62 @@ public abstract class AbstractTest extends Arquillian {
 
     protected static final Logger log = Logger.getLogger(AbstractTest.class.getName());
 
-    public String getRootUrl() {
-        return "https://openweathermap.org/";
+    protected RestClient restClient;
+
+    //================== API ======================
+
+    protected RestClient getRestClient() {
+        // if rest client is not created yet or the user of current rest client and the current admin user
+        // is not the same, need to create new rest client
+        if (Objects.isNull(restClient)) {
+            log.info("Creating new rest client for current user: " + "luuthanhquocminh@gmail.com");
+            restClient = new RestClient(
+                    new RestClient.RestProfile(
+                            "api.openweathermap.org", "luuthanhquocminh@gmail.com", "Minh2708"));
+        }
+        return restClient;
     }
 
-    public void openUrl(String url) {
-        String pageURL;
+    //================== Web ======================
 
-        if (url.contains(getRootUrl())) {
-            pageURL = url.replaceAll("^/", "");
-        } else {
-            pageURL = getRootUrl() + url.replaceAll("^/", "");
-        }
 
-        System.out.println("Loading page ... " + pageURL);
 
-        BrowserUtils.addMagicElementToDOM(browser);
-        // Request Selenium to load a URL. If current URL is the one we want to load, page is NOT reloaded.
-        browser.get(pageURL);
+    //================== Window Size ======================
 
-        // If Magic element is still present, refresh the page.
-        for (int attempts = 0; attempts < 3; attempts++) {
-            if (!BrowserUtils.isMagicElementPresentInDOM(browser)) {
-                return;
+    @Test(groups = {"createProject"})
+    @Parameters({"windowSize"})
+    public void init(@Optional("maximize") String windowSize) throws JSONException {
+        System.out.println("Current browser agent is: " + getCurrentBrowserAgent(browser).toUpperCase());
+        // override default value of properties
+        initProperties();
+
+        // adjust window size to run on mobile mode
+        if (!windowSize.equals("maximize")) adjustWindowSize(windowSize);
+    }
+
+    protected void initProperties() {
+        // should be implemented later in abstract test or test classes
+    }
+
+    private void adjustWindowSize(String windowSize) {
+        // if having wide use, we should consider dimension properties
+        // drone definition: http://arquillian.org/arquillian-extension-drone/#webdriver-configuration (see property named dimensions)
+        // e.g.: https://github.com/arquillian/arquillian-extension-drone/blob/master/drone-webdriver/src/test/resources/arquillian.xml#L31
+        String[] dimensions = windowSize.split(",");
+        if (dimensions.length == 2) {
+            try {
+                setWindowSize(Integer.valueOf(dimensions[0]), Integer.valueOf(dimensions[1]));
+            } catch (NumberFormatException e) {
+                throw new IllegalStateException("ERROR: Invalid window size given: " + windowSize);
             }
-
-            browser.navigate().refresh();
+        } else {
+            throw new IllegalStateException("ERROR: Invalid window size given: " + windowSize);
         }
-
-        log.warning("Page content might not be fully reloaded");
     }
+
+    private void setWindowSize(final int width, final int height) {
+        log.info("resizing window to " + width + "x" + height);
+        browser.manage().window().setSize(new Dimension(width, height));
+    }
+    //================== Window Size ======================
 }

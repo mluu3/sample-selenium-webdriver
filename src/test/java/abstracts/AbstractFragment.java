@@ -1,15 +1,14 @@
 package test.java.abstracts;
 
-import static java.util.Objects.isNull;
-
 import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.graphene.fragment.Root;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
 import java.util.logging.Logger;
+
+import static java.util.Objects.isNull;
 
 public abstract class AbstractFragment {
 
@@ -33,8 +32,4 @@ public abstract class AbstractFragment {
         }
         return actions;
     }
-
-    protected static final By BY_LINK = By.tagName("a");
-
-    protected static final By BY_PARENT = By.xpath("..");
 }

@@ -1,7 +1,6 @@
 # Welcome to Arquillian Test Sample Project
 
 This maven project consists of following technologies/frameworks:
- - TestNG
  - Arquillian (testng-standalone)
  - Graphene/Drone
  - Selenium

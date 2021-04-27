@@ -1,21 +1,21 @@
 package test.java.weather;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.testng.annotations.Test;
-import test.java.abstracts.AbstractProjectTest;
+import test.java.abstracts.AbstractUITest;
 import test.java.ultil.RestRequest;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-public class APITest extends AbstractProjectTest {
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
+
+public class APITest extends AbstractUITest {
 
     @Test(dependsOnGroups = "createProject")
     public void searchAPITest() throws IOException {

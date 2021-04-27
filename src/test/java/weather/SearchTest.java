@@ -1,84 +1,38 @@
 package test.java.weather;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
-
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
-import test.java.abstracts.AbstractProjectTest;
-import test.java.fragment.FindPage;
-import test.java.fragment.FindPage.Record;
-import test.java.fragment.SearchForm;
+import test.java.abstracts.AbstractUITest;
+import test.java.fragment.Dialog;
+import test.java.fragment.MenuNavigation;
+import test.java.fragment.MenuNavigation.Navigator;
+import test.java.fragment.TeacherGradebook;
+import test.java.fragment.TeacherGradebook.SubmitTab;
 
-public class SearchTest extends AbstractProjectTest {
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-    @Test(dependsOnGroups = "createProject")
-    public void searchDesignTest() {
-        SearchForm searchForm = initHomePage().getHeaderWebsite().getSearchForm();
-        assertTrue(searchForm.isHiddenSubmit(), "Submit button should be hidden");
-        assertTrue(searchForm.isSearchInputVisible(), "Search input should be visible");
-        assertEquals(searchForm.getPlaceHolder(), "Weather in your city");
-    }
+import static org.junit.Assert.assertEquals;
+import static test.java.ultil.Screenshots.takeScreenshot;
 
-    //should design independence test; however, want to show how to control test;
-    @Test(dependsOnMethods = "searchDesignTest", description = "search with single & multiple results")
-    public void searchTestWithResult() {
-        SearchForm searchFormOnHeader = initHomePage().getHeaderWebsite().getSearchForm();
-        searchFormOnHeader.search("usa, JP");
-        FindPage findPage = FindPage.getInstance(browser);
-        assertEquals(findPage.getRecordSize(), 1);
-        Record record = findPage.getRecordByTitle("Usa, JP");
-        //Stable data
-        assertEquals(record.getLocation(), "Usa, JP");
-        assertEquals(record.getPosition(), "[33.45, 133.45]");
-        //Unstable data
-        assertTrue(record.getImageUrl().contains("http://openweathermap.org/img/wn/"), "Wrong path");
-        assertTrue(record.getBadge().matches("\\d°С"), "Should be right format");
-        assertTrue(record.hasWeather(), "Weather should be visible");
+public class SearchTest extends AbstractUITest {
 
-        searchFormOnHeader.search("usa");
-        assertEquals(findPage.getRecordSize(), 3);
+    @Test
+    public void testRoleTeacher() {
+        initLoginPage()
+                .login("teacherpnt2@apollo.edu.vn", "apollo6543@1")
+                .selectCenter("Pham Ngoc Thach");
+        assertEquals(MenuNavigation.getInstance(browser).listItems(), Stream.of(Navigator.values())
+                .map(Navigator::getNavigator).collect(Collectors.toList()));
 
-        searchFormOnHeader.search("   usa, JP");
-        record = findPage.getRecordByTitle("Usa, JP");
-        assertEquals(record.getLocation(), "Usa, JP");
-        assertEquals(record.getPosition(), "[33.45, 133.45]");
-        assertTrue(record.getImageUrl().contains("http://openweathermap.org/img/wn/"), "Wrong path");
-        assertTrue(record.getBadge().matches("\\d°С"), "Should be right format");
-        assertTrue(record.hasWeather(), "Weather should be visible");
-    }
-
-    @DataProvider(name = "input")
-    public Object[][] getInput() {
-        return new Object[][]{
-                {"abc"},
-                {"*, JP"}
-        };
-    }
-
-    @Test(dependsOnMethods = "searchDesignTest", dataProvider = "input", description = "search with no found result")
-    public void searchTestWithoutResult(String input) {
-        SearchForm searchFormOnHeader = initHomePage().getHeaderWebsite().getSearchForm();
-        searchFormOnHeader.search(input);
-        FindPage findPage = FindPage.getInstance(browser);
-        assertEquals(findPage.getSearchForm().getValue(),input);
-        assertEquals(findPage.getAlertWarning(),"Not found");
-    }
-
-    @Test(dependsOnMethods = "searchDesignTest", description = "search with range of length input")
-    public void limitInputSearchTest() {
-        SearchForm searchFormOnHeader = initHomePage().getHeaderWebsite().getSearchForm();
-        searchFormOnHeader.search("");
-        FindPage findPage = FindPage.getInstance(browser);
-        assertEquals(findPage.getSearchForm().getValue(),"London, UK");
-
-        searchFormOnHeader.search("ab");
-        assertFalse(findPage.isAlertWarningVisible(),"Shouldn't display warning");
-        assertFalse(findPage.isRecordTableVisible(),"Shouldn't display record table");
-
-        searchFormOnHeader.search("abcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdeabcdea");
-        assertFalse(findPage.isAlertWarningVisible(),"Shouldn't display warning");
-        assertFalse(findPage.isRecordTableVisible(),"Shouldn't display record table");
+        TeacherGradebook teacherGradebook = initTeacherGradebook();
+        Dialog dialog = Dialog.getInstance(browser);
+        waitForPageReloading();
+        assertEquals(dialog.getTitle(), "You have 1 gradebook waiting");
+        dialog.confirm();
+        SubmitTab submitTab = teacherGradebook.selectSubmitTab();
+        assertEquals(submitTab.getGradebook(1), "HCM22104-C0008Diamond-0159 - Gradebook");
+        assertEquals(submitTab.getDeadline(1), "22/04/2021");
+        assertEquals(submitTab.countGradebook(), 1);
+        takeScreenshot(browser, "abc", getClass());
     }
 }

@@ -5,5 +5,13 @@
     <extension qualifier="webdriver">
         <property name="browser">chrome</property>
         <property name="chromeDriverBinary">${chromeDriverBinaryPath}</property>
+        <property name="chromeExperimentalOption">
+        {
+            "prefs": {
+                "download.default_directory": "/usr/local/path/to/download/directory"
+            }
+        }
+        </property>
+        <property name="chromePrintOptions">true</property>
     </extension>
 </arquillian>

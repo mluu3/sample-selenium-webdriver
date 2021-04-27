@@ -1,7 +1,5 @@
 package test.java.ultil;
 
-import static java.lang.String.format;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpHost;
@@ -22,6 +20,8 @@ import org.springframework.http.HttpStatus;
 
 import java.io.IOException;
 
+import static java.lang.String.format;
+
 public class RestClient {
 
     private final static int DEFAULT_PORT = 443;
@@ -36,7 +36,7 @@ public class RestClient {
     public RestClient(RestProfile profile, HttpRequestRetryHandler handler) {
         this.profile = profile;
 
-        client = getGooddataHttpClient(profile.getUsername(), profile.getPassword(), handler);
+        client = getCustomerHttpClient(profile.getUsername(), profile.getPassword(), handler);
     }
 
     public HttpResponse execute(HttpRequestBase request) {
@@ -88,7 +88,7 @@ public class RestClient {
         return new HttpHost(hostName, port, "https");
     }
 
-    private HttpClient getGooddataHttpClient(String user, String password,
+    private HttpClient getCustomerHttpClient(String user, String password,
                                              HttpRequestRetryHandler retryHandler) {
         final HttpClientBuilder httpClientBuilder = HttpClientBuilder.create();
         httpClientBuilder.setRetryHandler(retryHandler);
