@@ -3,30 +3,139 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>ui-test</groupId>
+    <groupId>com.autotest.core</groupId>
     <artifactId>ui-test</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+
+    <modules>
+        <module>ui-core</module>
+        <module>ui-tests-core</module>
+    </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <targetJdk>1.8</targetJdk>
+        <ignoreFailedTests>true</ignoreFailedTests>
+
+        <skipTests>false</skipTests>
+        <arquillian.xml>arquillian.xml</arquillian.xml>
+        <browser>firefox</browser>
+<!--        <firefoxDriverBinaryPath>/usr/bin/geckodriver</firefoxDriverBinaryPath>-->
+
+        <screenResolution>fullscreen</screenResolution>
+
+<!--        <chromeDriverBinaryPath>/usr/bin/chromium-browser</chromeDriverBinaryPath>-->
+        <!-- (seconds) -->
+        <timeout>90</timeout>
+        <!-- possible values are: local-firefox/local-chrome -->
+        <test.execution.env>local-firefox</test.execution.env>
+
+        <coreModuleName>ui-core</coreModuleName>
+        <corePath>${moduleCorePath}</corePath>
+        <moduleCorePath>${basedir}${file.separator}..${file.separator}${coreModuleName}</moduleCorePath>
+
+        <testng.suite.xml>testng-basic.xml</testng.suite.xml>
+
+        <version.org.jboss.arquillian>1.1.15.Final</version.org.jboss.arquillian>
+        <version.org.jboss.arquillian.drone>2.5.1</version.org.jboss.arquillian.drone>
+        <version.org.jboss.arquillian.graphene2>2.3.2</version.org.jboss.arquillian.graphene2>
+        <version.org.seleniumhq.selenium>3.11.0</version.org.seleniumhq.selenium>
+        <version.org.arquillian.recorder>1.1.6.Final</version.org.arquillian.recorder>
+        <version.org.apache.maven.surefire-plugin>2.19.1</version.org.apache.maven.surefire-plugin>
+        <version.org.testng>6.9.10</version.org.testng>
+        <video.recording>false</video.recording>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian.selenium</groupId>
+                <artifactId>selenium-bom</artifactId>
+                <version>${version.org.seleniumhq.selenium}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-bom</artifactId>
+                <type>pom</type>
+                <version>${version.org.jboss.arquillian.drone}</version>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.arquillian.extension</groupId>
+                <artifactId>arquillian-desktop-video-recorder</artifactId>
+                <version>${version.org.arquillian.recorder}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${version.org.jboss.arquillian}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${version.org.testng}</version>
+        </dependency>
+
+        <!-- Arquillian TestNG Standalone -->
+        <dependency>
+            <groupId>org.jboss.arquillian.testng</groupId>
+            <artifactId>arquillian-testng-standalone</artifactId>
+            <version>${version.org.jboss.arquillian}</version>
+        </dependency>
+        <!-- Graphene dependency chain - imports all other dependencies required -->
+        <dependency>
+            <groupId>org.jboss.arquillian.graphene</groupId>
+            <artifactId>graphene-webdriver</artifactId>
+            <version>${version.org.jboss.arquillian.graphene2}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20171018</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>5.2.3.RELEASE</version>
+        </dependency>
+    </dependencies>
+
+    <!-- no tests by default -->
     <build>
         <sourceDirectory>src</sourceDirectory>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${targetJdk}</source>
-                    <target>${targetJdk}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${version.org.apache.maven.surefire-plugin}</version>
-                <configuration>
-                    <skip>true</skip>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.3</version>
+                    <configuration>
+                        <source>${targetJdk}</source>
+                        <target>${targetJdk}</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${version.org.apache.maven.surefire-plugin}</version>
+                    <configuration>
+                        <skip>true</skip>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
@@ -80,6 +189,10 @@
                                             <property>
                                                 <name>firefoxDriverBinaryPath</name>
                                                 <value>${firefoxDriverBinaryPath}</value>
+                                            </property>
+                                            <property>
+                                                <name>corePath</name>
+                                                <value>${corePath}</value>
                                             </property>
                                             <property>
                                                 <name>timeout</name>
@@ -146,14 +259,6 @@
                     <value>true</value>
                 </property>
             </activation>
-            <dependencies>
-                <!-- Arquillian extension for video recording -->
-                <dependency>
-                    <groupId>org.jboss.arquillian.extension</groupId>
-                    <artifactId>arquillian-screen-recorder</artifactId>
-                    <version>${version.org.jboss.arquillian.ext.screenrecorder}</version>
-                </dependency>
-            </dependencies>
         </profile>
 
         <profile>
@@ -168,101 +273,4 @@
             </properties>
         </profile>
     </profiles>
-
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <targetJdk>1.8</targetJdk>
-        <ignoreFailedTests>true</ignoreFailedTests>
-
-        <skipTests>false</skipTests>
-        <arquillian.xml>arquillian.xml</arquillian.xml>
-        <browser>firefox</browser>
-<!--        <firefoxDriverBinaryPath>/usr/bin/geckodriver</firefoxDriverBinaryPath>-->
-
-        <screenResolution>fullscreen</screenResolution>
-
-<!--        <chromeDriverBinaryPath>/usr/bin/chromium-browser</chromeDriverBinaryPath>-->
-        <!-- (seconds) -->
-        <timeout>90</timeout>
-        <!-- possible values are: local-firefox/local-chrome -->
-        <test.execution.env>local-firefox</test.execution.env>
-        <testng.suite.xml>testng-basic.xml</testng.suite.xml>
-        <version.org.jboss.arquillian>1.1.15.Final</version.org.jboss.arquillian>
-        <version.org.jboss.arquillian.drone>2.5.1</version.org.jboss.arquillian.drone>
-        <version.org.jboss.arquillian.graphene>2.3.2</version.org.jboss.arquillian.graphene>
-        <version.org.jboss.arquillian.graphene2>2.3.2</version.org.jboss.arquillian.graphene2>
-        <version.org.jboss.arquillian.ext.screenrecorder>1.0.0.Alpha1</version.org.jboss.arquillian.ext.screenrecorder>
-        <version.org.seleniumhq.selenium>3.11.0</version.org.seleniumhq.selenium>
-        <version.org.apache.maven.surefire-plugin>2.19.1</version.org.apache.maven.surefire-plugin>
-        <version.org.testng>6.9.10</version.org.testng>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.jboss.arquillian.selenium</groupId>
-                <artifactId>selenium-bom</artifactId>
-                <version>${version.org.seleniumhq.selenium}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian.extension</groupId>
-                <artifactId>arquillian-drone-bom</artifactId>
-                <type>pom</type>
-                <version>${version.org.jboss.arquillian.drone}</version>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <type>pom</type>
-                <version>${version.org.jboss.arquillian}</version>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${version.org.testng}</version>
-        </dependency>
-
-        <!-- Arquillian TestNG Standalone -->
-        <dependency>
-            <groupId>org.jboss.arquillian.testng</groupId>
-            <artifactId>arquillian-testng-standalone</artifactId>
-        </dependency>
-        <!-- Graphene dependency chain - imports all other dependencies required -->
-        <dependency>
-            <groupId>org.jboss.arquillian.graphene</groupId>
-            <artifactId>graphene-webdriver</artifactId>
-            <version>${version.org.jboss.arquillian.graphene2}</version>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20171018</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>5.2.3.RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>4.4.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>

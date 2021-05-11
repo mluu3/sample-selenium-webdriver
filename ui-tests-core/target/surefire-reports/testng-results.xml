@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results total="2" passed="0" failed="0" skipped="2">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-05-12T03:50:49Z" name="Surefire suite" finished-at="2021-05-12T03:50:49Z" duration-ms="220">
+    <groups>
+      <group name="createProject">
+        <method signature="AbstractTest.init(java.lang.String)[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" name="init" class="com.autotest.core.abstracts.AbstractTest"/>
+      </group> <!-- createProject -->
+    </groups>
+    <test started-at="2021-05-12T03:50:49Z" name="Surefire test" finished-at="2021-05-12T03:50:49Z" duration-ms="220">
+      <class name="com.autotest.core.appolo.SearchTest">
+        <test-method is-config="true" signature="arquillianBeforeSuite()[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:48Z" name="arquillianBeforeSuite" finished-at="2021-05-12T10:50:49Z" duration-ms="307" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- arquillianBeforeSuite -->
+        <test-method is-config="true" signature="arquillianBeforeClass()[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="arquillianBeforeClass" finished-at="2021-05-12T10:50:49Z" duration-ms="21" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- arquillianBeforeClass -->
+        <test-method is-config="true" signature="arquillianBeforeTest(java.lang.reflect.Method)[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="arquillianBeforeTest" finished-at="2021-05-12T10:50:49Z" duration-ms="0" status="FAIL">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.autotest.core.abstracts.AbstractTest.init(java.lang.String) throws org.json.JSONException]]>
+              </value>
+            </param>
+          </params>
+          <exception class="java.lang.IllegalStateException">
+            <message>
+              <![CDATA[There is no context available for qualifier org.jboss.arquillian.drone.api.annotation.Default. Available contexts are [].]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.IllegalStateException: There is no context available for qualifier org.jboss.arquillian.drone.api.annotation.Default. Available contexts are [].
+	at org.jboss.arquillian.graphene.context.GrapheneContextImpl$LazyContext.getContext(GrapheneContextImpl.java:302)
+	at org.jboss.arquillian.graphene.context.GrapheneContextImpl$LazyContext.getConfiguration(GrapheneContextImpl.java:234)
+	at org.jboss.arquillian.graphene.DefaultGrapheneRuntime.waitGui(DefaultGrapheneRuntime.java:105)
+	at org.jboss.arquillian.graphene.Graphene.waitGui(Graphene.java:216)
+	at org.jboss.arquillian.graphene.enricher.StaleElementInterceptor.intercept(StaleElementInterceptor.java:43)
+	at org.jboss.arquillian.graphene.proxy.InvocationContextImpl.invoke(InvocationContextImpl.java:87)
+	at org.jboss.arquillian.graphene.enricher.SearchContextInterceptor.intercept(SearchContextInterceptor.java:50)
+	at org.jboss.arquillian.graphene.proxy.InvocationContextImpl.invoke(InvocationContextImpl.java:87)
+	at org.jboss.arquillian.graphene.proxy.GrapheneContextualHandler$2.call(GrapheneContextualHandler.java:241)
+	at org.jboss.arquillian.graphene.context.BrowserActions.performAction(BrowserActions.java:62)
+	at org.jboss.arquillian.graphene.proxy.GrapheneContextualHandler.invoke(GrapheneContextualHandler.java:237)
+	at com.sun.proxy.$Proxy28.getScreenshotAs(Unknown Source)
+	at com.autotest.core.ultil.Screenshots.takeScreenshot(Screenshots.java:35)
+	at com.autotest.core.ultil.Screenshots.takeFailureScreenshot(Screenshots.java:27)
+	at com.autotest.core.ultil.testng.listener.AuxiliaryFailureScreenshotListener.afterInvocation(AuxiliaryFailureScreenshotListener.java:42)
+	at org.testng.internal.invokers.InvokedMethodListenerInvoker$InvokeAfterInvocationWithoutContextStrategy.callMethod(InvokedMethodListenerInvoker.java:100)
+	at org.testng.internal.invokers.InvokedMethodListenerInvoker.invokeListener(InvokedMethodListenerInvoker.java:62)
+	at org.testng.internal.Invoker.runInvokedMethodListeners(Invoker.java:556)
+	at org.testng.internal.Invoker.invokeConfigurationMethod(Invoker.java:535)
+	at org.testng.internal.Invoker.invokeConfigurations(Invoker.java:215)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:589)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:820)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1128)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:782)
+	at org.testng.TestRunner.run(TestRunner.java:632)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:366)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:361)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:319)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:268)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1244)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
+	at org.testng.TestNG.run(TestNG.java:1064)
+	at org.apache.maven.surefire.testng.TestNGExecutor.run(TestNGExecutor.java:132)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.executeSingleClass(TestNGDirectoryTestSuite.java:112)
+	at org.apache.maven.surefire.testng.TestNGDirectoryTestSuite.execute(TestNGDirectoryTestSuite.java:99)
+	at org.apache.maven.surefire.testng.TestNGProvider.invoke(TestNGProvider.java:147)
+	at org.apache.maven.surefire.booter.ForkedBooter.invokeProviderInSameClassLoader(ForkedBooter.java:290)
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:242)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:121)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.IllegalStateException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- arquillianBeforeTest -->
+        <test-method signature="init(java.lang.String)[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="init" finished-at="2021-05-12T10:50:49Z" duration-ms="19" status="SKIP">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[maximize]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- init -->
+        <test-method is-config="true" signature="arquillianAfterTest(java.lang.reflect.Method)[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="arquillianAfterTest" finished-at="2021-05-12T10:50:49Z" duration-ms="1" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.autotest.core.abstracts.AbstractTest.init(java.lang.String) throws org.json.JSONException]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- arquillianAfterTest -->
+        <test-method signature="testRoleTeacher()[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="testRoleTeacher" finished-at="2021-05-12T10:50:49Z" duration-ms="1" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testRoleTeacher -->
+        <test-method is-config="true" signature="arquillianBeforeTest(java.lang.reflect.Method)[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="arquillianBeforeTest" finished-at="2021-05-12T10:50:49Z" duration-ms="0" status="SKIP">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- arquillianBeforeTest -->
+        <test-method is-config="true" signature="arquillianAfterClass()[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="arquillianAfterClass" finished-at="2021-05-12T10:50:49Z" duration-ms="2" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- arquillianAfterClass -->
+        <test-method is-config="true" signature="arquillianAfterTest(java.lang.reflect.Method)[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="arquillianAfterTest" finished-at="2021-05-12T10:50:49Z" duration-ms="0" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[public void com.autotest.core.appolo.SearchTest.testRoleTeacher()]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- arquillianAfterTest -->
+        <test-method is-config="true" signature="arquillianAfterSuite()[pri:0, instance:com.autotest.core.appolo.SearchTest@782663d3]" started-at="2021-05-12T10:50:49Z" name="arquillianAfterSuite" finished-at="2021-05-12T10:50:49Z" duration-ms="1" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- arquillianAfterSuite -->
+      </class> <!-- com.autotest.core.appolo.SearchTest -->
+    </test> <!-- Surefire test -->
+  </suite> <!-- Surefire suite -->
+</testng-results>

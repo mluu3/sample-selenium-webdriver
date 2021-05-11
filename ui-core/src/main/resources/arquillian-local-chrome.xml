@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://jboss.org/schema/arquillian http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+    <extension qualifier="webdriver">
+        <property name="browser">chrome</property>
+        <property name="dimensions">${screenResolution}</property>
+        <property name="chromeDriverBinary">${chromeDriverBinaryPath}</property>
+        <property name="chromeArguments">${chromeDriverArguments} --ignore-certificate-errors</property>
+        <property name="chromePrintOptions">true</property>
+        <property name="loggingPrefs">browser=ALL</property>
+        <property name="chromeExperimentalOption">
+            {"prefs": {"download.default_directory": "${browserDownloadFolder}", "download.prompt_for_download": "false"}}
+        </property>
+    </extension>
+
+    <extension qualifier="graphene">
+        <property name="waitModelInterval">${timeout:90}</property>
+        <property name="waitGuiInterval">${timeout:90}</property>
+        <property name="waitAjaxInterval">${timeout:90}</property>
+        <property name="waitGuardInterval">${timeout:90}</property>
+    </extension>
+
+    <extension qualifier="recorder">
+        <property name="rootDir">target/videos</property>
+        <property name="takeOnlyOnFail">false</property>
+        <property name="screenshot">none</property>
+    </extension>
+
+    <extension qualifier="drone">
+        <property name="instantiationTimeoutInSeconds">120</property>
+    </extension>
+</arquillian>

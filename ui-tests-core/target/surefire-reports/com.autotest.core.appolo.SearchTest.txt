@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: com.autotest.core.appolo.SearchTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 1, Errors: 0, Skipped: 3, Time elapsed: 0.747 sec <<< FAILURE! - in com.autotest.core.appolo.SearchTest
+arquillianBeforeTest(com.autotest.core.appolo.SearchTest)  Time elapsed: 0.645 sec  <<< FAILURE!
+java.lang.IllegalStateException: There is no context available for qualifier org.jboss.arquillian.drone.api.annotation.Default. Available contexts are [].
+

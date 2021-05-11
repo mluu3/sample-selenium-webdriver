@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.autotest.core.appolo.SearchTest" time="0.747" tests="4" errors="0" skipped="3" failures="1">
+  <properties>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="java.vm.version" value="15.0.1+9"/>
+    <property name="sun.boot.library.path" value="/usr/local/Cellar/openjdk/15.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="maven.multiModuleProjectDirectory" value="/Users/lap00730/Documents/Minh/sample-selenium-webdriver"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://openjdk.java.net/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=":"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="test" value="SearchTest"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="/Users/lap00730/Documents/Minh/sample-selenium-webdriver"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="15.0.1+9"/>
+    <property name="os.arch" value="x86_64"/>
+    <property name="java.io.tmpdir" value="/var/folders/hl/m8j9g6c54g5bx60c1g5rmnr80000gp/T/"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="classworlds.conf" value="/usr/local/Cellar/maven/3.6.3_1/libexec/bin/m2.conf"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="firefoxDriverBinaryPath" value="/Users/lap00730/Documents/Minh/web-driver/geckodriver"/>
+    <property name="java.library.path" value="/Users/lap00730/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="maven.conf" value="/usr/local/Cellar/maven/3.6.3_1/libexec/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="59.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.15.7"/>
+    <property name="library.jansi.path" value="/usr/local/Cellar/maven/3.6.3_1/libexec/lib/jansi-native"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="user.home" value="/Users/lap00730"/>
+    <property name="user.timezone" value="Asia/Ho_Chi_Minh"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="15"/>
+    <property name="user.name" value="lap00730"/>
+    <property name="java.class.path" value="/usr/local/Cellar/maven/3.6.3_1/libexec/boot/plexus-classworlds-2.6.0.jar"/>
+    <property name="java.vm.specification.version" value="15"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.plexus.classworlds.launcher.Launcher -Dtest.execution.env=local-firefox -DfirefoxDriverBinaryPath=/Users/lap00730/Documents/Minh/web-driver/geckodriver -Dtest=SearchTest integration-test -Pselenium"/>
+    <property name="java.home" value="/usr/local/Cellar/openjdk/15.0.1/libexec/openjdk.jdk/Contents/Home"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="15.0.1"/>
+    <property name="java.vendor" value="N/A"/>
+    <property name="maven.home" value="/usr/local/Cellar/maven/3.6.3_1/libexec"/>
+    <property name="file.separator" value="/"/>
+    <property name="java.version.date" value="2020-10-20"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="test.execution.env" value="local-firefox"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+  </properties>
+  <testcase name="arquillianBeforeTest" classname="com.autotest.core.appolo.SearchTest" time="0.645">
+    <failure message="There is no context available for qualifier org.jboss.arquillian.drone.api.annotation.Default. Available contexts are []." type="java.lang.IllegalStateException">java.lang.IllegalStateException: There is no context available for qualifier org.jboss.arquillian.drone.api.annotation.Default. Available contexts are [].
+</failure>
+    <system-err><![CDATA[May 12, 2021 10:50:49 AM org.jboss.arquillian.drone.webdriver.factory.remote.reusable.ReusedSessionPermanentFileStorage readStore
+INFO: Reused session store is not available at /Users/lap00730/Documents/Minh/sample-selenium-webdriver/ui-tests-core/target/.drone-webdriver-session-store, a new one will be created.
+May 12, 2021 10:50:49 AM org.openqa.selenium.remote.DesiredCapabilities firefox
+INFO: Using `new FirefoxOptions()` is preferred to `DesiredCapabilities.firefox()`
+May 12, 2021 10:50:49 AM org.openqa.selenium.remote.DesiredCapabilities firefox
+INFO: Using `new FirefoxOptions()` is preferred to `DesiredCapabilities.firefox()`
+May 12, 2021 10:50:49 AM com.autotest.core.ultil.testng.listener.AuxiliaryFailureScreenshotListener afterInvocation
+SEVERE: User preferences does not point to a valid path ui-core/target/classes/firefox-prefs.js
+java.lang.IllegalArgumentException: User preferences does not point to a valid path ui-core/target/classes/firefox-prefs.js
+	at org.jboss.arquillian.drone.webdriver.utils.Validate.isValidPath(Validate.java:77)
+	at org.jboss.arquillian.drone.webdriver.factory.FirefoxDriverFactory.addUserPreferencesFromFile(FirefoxDriverFactory.java:159)
+	at org.jboss.arquillian.drone.webdriver.factory.FirefoxDriverFactory.getCapabilities(FirefoxDriverFactory.java:119)
+	at org.jboss.arquillian.drone.webdriver.factory.FirefoxDriverFactory.createInstance(FirefoxDriverFactory.java:74)
+	at org.jboss.arquillian.drone.webdriver.factory.FirefoxDriverFactory.createInstance(FirefoxDriverFactory.java:40)
+	at org.jboss.arquillian.drone.webdriver.factory.WebDriverFactory.createInstance(WebDriverFactory.java:127)
+	at org.jboss.arquillian.drone.webdriver.factory.WebDriverFactory.createInstance(WebDriverFactory.java:38)
+	at org.jboss.arquillian.drone.impl.DroneConfigurator$1.createInstance(DroneConfigurator.java:112)
+	at org.jboss.arquillian.drone.impl.CachingCallableImpl.call(CachingCallableImpl.java:44)
+	at org.jboss.arquillian.core.impl.threading.ThreadedExecutorService$ContextualCallable.call(ThreadedExecutorService.java:88)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:264)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1130)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:630)
+	at java.base/java.lang.Thread.run(Thread.java:832)
+
+]]></system-err>
+  </testcase>
+  <testcase name="arquillianBeforeTest" classname="com.autotest.core.appolo.SearchTest" time="0">
+    <skipped/>
+  </testcase>
+  <testcase name="init" classname="com.autotest.core.appolo.SearchTest" time="0">
+    <skipped/>
+    <system-out><![CDATA[[10:50:49] STARTED: abstracts.AbstractTest.init("maximize")
+[10:50:49] SKIP: abstracts.AbstractTest.init("maximize")
+
+]]></system-out>
+  </testcase>
+  <testcase name="testRoleTeacher" classname="com.autotest.core.appolo.SearchTest" time="0">
+    <skipped/>
+    <system-out><![CDATA[[10:50:49] STARTED: appolo.SearchTest.testRoleTeacher()
+[10:50:49] SKIP: appolo.SearchTest.testRoleTeacher()
+
+]]></system-out>
+  </testcase>
+</testsuite>

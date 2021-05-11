@@ -1,0 +1,34 @@
+<arquillian xmlns="http://jboss.org/schema/arquillian"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="
+        http://jboss.org/schema/arquillian
+        http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
+
+    <!-- possible options are listed at https://docs.jboss.org/author/display/ARQ/Drone -->
+    <extension qualifier="webdriver">
+        <property name="browser">firefox</property>
+        <property name="firefoxDriverBinary">${firefoxDriverBinaryPath}</property>
+        <property name="dimensions">${screenResolution}</property>
+<!--        <property name="firefoxUserPreferences">ui-core/target/classes/firefox-prefs.js</property>-->
+    </extension>
+
+    <extension qualifier="graphene">
+        <property name="waitModelInterval">${timeout:90}</property>
+        <property name="waitGuiInterval">${timeout:90}</property>
+        <property name="waitAjaxInterval">${timeout:90}</property>
+        <property name="waitGuardInterval">${timeout:90}</property>
+    </extension>
+
+    <!-- This fix is for control the recoding in code and the version of Arquillian is 1.1.6.Final
+        The properties <rootDir> it can not able to create nested folders,
+        if you want nested folder you have to create parent manually
+        the property <"takeOnlyOnFail"> is always = false, if not it cannot be control in code -->
+    <extension qualifier="recorder">
+        <property name="rootDir">target/videos</property>
+        <property name="takeOnlyOnFail">false</property>
+        <property name="screenshot">none</property>
+    </extension>
+    <extension qualifier="drone">
+        <property name="instantiationTimeoutInSeconds">120</property>
+    </extension>
+</arquillian>
