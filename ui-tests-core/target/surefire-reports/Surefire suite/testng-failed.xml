@@ -10,14 +10,13 @@
     <classes>
       <class name="com.autotest.core.appolo.SearchTest">
         <methods>
-          <include name="arquillianBeforeSuite"/>
           <include name="arquillianAfterSuite"/>
-          <include name="arquillianBeforeClass"/>
-          <include name="init"/>
-          <include name="arquillianBeforeTest"/>
+          <include name="testARoleTeacher"/>
           <include name="arquillianAfterClass"/>
+          <include name="arquillianBeforeClass"/>
           <include name="arquillianAfterTest"/>
-          <include name="testRoleTeacher"/>
+          <include name="arquillianBeforeSuite"/>
+          <include name="arquillianBeforeTest"/>
         </methods>
       </class> <!-- com.autotest.core.appolo.SearchTest -->
     </classes>

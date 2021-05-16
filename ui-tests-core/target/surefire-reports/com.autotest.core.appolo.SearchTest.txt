@@ -1,7 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.autotest.core.appolo.SearchTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 1, Errors: 0, Skipped: 3, Time elapsed: 0.747 sec <<< FAILURE! - in com.autotest.core.appolo.SearchTest
-arquillianBeforeTest(com.autotest.core.appolo.SearchTest)  Time elapsed: 0.645 sec  <<< FAILURE!
-java.lang.IllegalStateException: There is no context available for qualifier org.jboss.arquillian.drone.api.annotation.Default. Available contexts are [].
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 18.645 sec <<< FAILURE! - in com.autotest.core.appolo.SearchTest
+testARoleTeacher(com.autotest.core.appolo.SearchTest)  Time elapsed: 7.266 sec  <<< FAILURE!
+java.lang.AssertionError: expected [You have 1 gradebook1111 waiting] but found [You have 1 gradebook waiting]
+	at com.autotest.core.appolo.SearchTest.testARoleTeacher(SearchTest.java:30)
 

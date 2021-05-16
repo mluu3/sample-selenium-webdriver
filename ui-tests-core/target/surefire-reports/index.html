@@ -24,7 +24,7 @@
     <div class="top-banner-root">
       <span class="top-banner-title-font">Test results</span>
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -38,7 +38,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Surefire_suite" class="navigator-link">
-              <span class="suite-name border-skipped">Surefire suite</span>
+              <span class="suite-name border-failed">Surefire suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -91,26 +91,35 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods,  2 skipped,  </span>
+                    <span class="method-stats">2 methods, 1 failed,   1 passed</span>
                   </li>
                   <li>
-                    <span class="method-list-title skipped">Skipped methods</span>
-                    <span class="show-or-hide-methods skipped">
-                      <a href="#" panel-name="suite-Surefire_suite" class="hide-methods skipped suite-Surefire_suite"> (hide)</a> <!-- hide-methods skipped suite-Surefire_suite -->
-                      <a href="#" panel-name="suite-Surefire_suite" class="show-methods skipped suite-Surefire_suite"> (show)</a> <!-- show-methods skipped suite-Surefire_suite -->
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Surefire_suite" class="hide-methods failed suite-Surefire_suite"> (hide)</a> <!-- hide-methods failed suite-Surefire_suite -->
+                      <a href="#" panel-name="suite-Surefire_suite" class="show-methods failed suite-Surefire_suite"> (show)</a> <!-- show-methods failed suite-Surefire_suite -->
                     </span>
-                    <div class="method-list-content skipped suite-Surefire_suite">
+                    <div class="method-list-content failed suite-Surefire_suite">
                       <span>
-                        <img src="skipped.png" width="3%"/>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Surefire_suite" title="com.autotest.core.appolo.SearchTest" class="method navigator-link" hash-for-method="testARoleTeacher">testARoleTeacher</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Surefire_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title passed">Passed methods</span>
+                    <span class="show-or-hide-methods passed">
+                      <a href="#" panel-name="suite-Surefire_suite" class="hide-methods passed suite-Surefire_suite"> (hide)</a> <!-- hide-methods passed suite-Surefire_suite -->
+                      <a href="#" panel-name="suite-Surefire_suite" class="show-methods passed suite-Surefire_suite"> (show)</a> <!-- show-methods passed suite-Surefire_suite -->
+                    </span>
+                    <div class="method-list-content passed suite-Surefire_suite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-Surefire_suite" title="com.autotest.core.appolo.SearchTest" class="method navigator-link" hash-for-method="init(maximize)">init(maximize)</a> <!-- method navigator-link -->
                       </span>
                       <br/>
-                      <span>
-                        <img src="skipped.png" width="3%"/>
-                        <a href="#" panel-name="suite-Surefire_suite" title="com.autotest.core.appolo.SearchTest" class="method navigator-link" hash-for-method="testRoleTeacher">testRoleTeacher</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content skipped suite-Surefire_suite -->
+                    </div> <!-- method-list-content passed suite-Surefire_suite -->
                   </li>
                 </ul>
               </div> <!-- suite-section-content -->
@@ -122,9 +131,45 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Surefire_suite" class="panel Surefire_suite">
-          <div class="suite-Surefire_suite-class-skipped">
+          <div class="suite-Surefire_suite-class-failed">
             <div class="main-panel-header rounded-window-top">
-              <img src="skipped.png"/>
+              <img src="failed.png"/>
+              <span class="class-name">com.autotest.core.appolo.SearchTest</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testARoleTeacher">
+                  </a> <!-- testARoleTeacher -->
+                  <span class="method-name">testARoleTeacher</span>
+                  <div class="stack-trace">java.lang.AssertionError: expected [You have 1 gradebook1111 waiting] but found [You have 1 gradebook waiting]
+	at com.autotest.core.appolo.SearchTest.testARoleTeacher(SearchTest.java:30)
+	at org.jboss.arquillian.testng.Arquillian$2.invoke(Arquillian.java:145)
+	at org.jboss.arquillian.testng.standalone.LocalTestMethodExecutor.execute(LocalTestMethodExecutor.java:50)
+	at org.jboss.arquillian.core.impl.ObserverImpl.invoke(ObserverImpl.java:86)
+	at org.jboss.arquillian.core.impl.EventContextImpl.invokeObservers(EventContextImpl.java:103)
+	at org.jboss.arquillian.core.impl.EventContextImpl.proceed(EventContextImpl.java:90)
+	at org.jboss.arquillian.test.impl.TestContextHandler.createTestContext(TestContextHandler.java:116)
+	at org.jboss.arquillian.core.impl.ObserverImpl.invoke(ObserverImpl.java:86)
+	at org.jboss.arquillian.core.impl.EventContextImpl.proceed(EventContextImpl.java:95)
+	at org.jboss.arquillian.test.impl.TestContextHandler.createClassContext(TestContextHandler.java:83)
+	at org.jboss.arquillian.core.impl.ObserverImpl.invoke(ObserverImpl.java:86)
+	at org.jboss.arquillian.core.impl.EventContextImpl.proceed(EventContextImpl.java:95)
+	at org.jboss.arquillian.test.impl.TestContextHandler.createSuiteContext(TestContextHandler.java:69)
+	at org.jboss.arquillian.core.impl.ObserverImpl.invoke(ObserverImpl.java:86)
+	at org.jboss.arquillian.core.impl.EventContextImpl.proceed(EventContextImpl.java:95)
+	at org.jboss.arquillian.core.impl.ManagerImpl.fire(ManagerImpl.java:133)
+	at org.jboss.arquillian.test.impl.EventTestRunnerAdaptor.test(EventTestRunnerAdaptor.java:122)
+	at org.jboss.arquillian.testng.Arquillian.run(Arquillian.java:138)
+... Removed 52 stack frames
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Surefire_suite-class-failed -->
+          <div class="suite-Surefire_suite-class-passed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="passed.png"/>
               <span class="class-name">com.autotest.core.appolo.SearchTest</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
@@ -136,15 +181,8 @@
                   <span class="parameters">(maximize)</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="testRoleTeacher">
-                  </a> <!-- testRoleTeacher -->
-                  <span class="method-name">testRoleTeacher</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Surefire_suite-class-skipped -->
+          </div> <!-- suite-Surefire_suite-class-passed -->
         </div> <!-- panel Surefire_suite -->
         <div panel-name="test-xml-Surefire_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
@@ -206,18 +244,18 @@ data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
 data.addRows(2);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'init')
+data.setCell(0, 1, 'testARoleTeacher')
 data.setCell(0, 2, 'com.autotest.core.appolo.SearchTest')
-data.setCell(0, 3, 19);
+data.setCell(0, 3, 6700);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testRoleTeacher')
+data.setCell(1, 1, 'init')
 data.setCell(1, 2, 'com.autotest.core.appolo.SearchTest')
-data.setCell(1, 3, 1);
+data.setCell(1, 3, 139);
 window.suiteTableData['Surefire_suite']= { tableData: data, tableDiv: 'times-div-Surefire_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 20 ms</span>
+              <span class="suite-total-time">Total running time: 6 seconds</span>
               <div id="times-div-Surefire_suite">
               </div> <!-- times-div-Surefire_suite -->
             </div> <!-- times-div -->
@@ -250,37 +288,41 @@ return data;
               </div> <!-- configuration-suite before -->
               <div class="configuration-class before">
                 <span class="method-name">arquillianBeforeClass</span>
-                <span class="method-start">309 ms</span>
+                <span class="method-start">765 ms</span>
               </div> <!-- configuration-class before -->
               <div class="configuration-method before">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">arquillianBeforeTest(public void com.autotest.core.abstracts.AbstractTest.init(java.lang.String) throws org.json.JSONExce...)</span>
-                <span class="method-start">332 ms</span>
+                <span class="method-start">840 ms</span>
               </div> <!-- configuration-method before -->
               <div class="test-method">
                 <span class="method-name">init(maximize)</span>
-                <span class="method-start">503 ms</span>
+                <span class="method-start">9946 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
                 <span class="method-name">arquillianAfterTest(public void com.autotest.core.abstracts.AbstractTest.init(java.lang.String) throws org.json.JSONExce...)</span>
-                <span class="method-start">523 ms</span>
+                <span class="method-start">10421 ms</span>
               </div> <!-- configuration-method after -->
+              <div class="configuration-method before">
+                <span class="method-name">arquillianBeforeTest(public void com.autotest.core.appolo.SearchTest.testARoleTeacher())</span>
+                <span class="method-start">10424 ms</span>
+              </div> <!-- configuration-method before -->
               <div class="test-method">
-                <span class="method-name">testRoleTeacher</span>
-                <span class="method-start">524 ms</span>
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testARoleTeacher</span>
+                <span class="method-start">10425 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-method after">
-                <span class="method-name">arquillianAfterTest(public void com.autotest.core.appolo.SearchTest.testRoleTeacher())</span>
-                <span class="method-start">525 ms</span>
+                <span class="method-name">arquillianAfterTest(public void com.autotest.core.appolo.SearchTest.testARoleTeacher())</span>
+                <span class="method-start">17694 ms</span>
               </div> <!-- configuration-method after -->
               <div class="configuration-class after">
                 <span class="method-name">arquillianAfterClass</span>
-                <span class="method-start">525 ms</span>
+                <span class="method-start">17695 ms</span>
               </div> <!-- configuration-class after -->
               <div class="configuration-suite after">
                 <span class="method-name">arquillianAfterSuite</span>
-                <span class="method-start">556 ms</span>
+                <span class="method-start">17830 ms</span>
               </div> <!-- configuration-suite after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

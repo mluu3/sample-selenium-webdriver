@@ -11,7 +11,7 @@ import static com.autotest.core.ultil.WaitUtils.waitForElementPresent;
 
 public abstract class AbstractUITest extends AbstractTest {
 
-    private static final String ROOT_URL = "https://google.com.vn/";
+    private static final String ROOT_URL = "https://api.edugix.com/";
     private static final String TEACHER_GRADEBOOK_URL = ROOT_URL + "teacher/dashboard.html#/gradebook";
 
     protected LoginPage initLoginPage() throws JSONException {

@@ -11,9 +11,9 @@ import org.testng.ITestResult;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static com.autotest.core.ultil.Screenshots.takeFailureScreenshot;
 import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
-import static com.autotest.core.ultil.Screenshots.takeFailureScreenshot;
 
 public class AuxiliaryFailureScreenshotListener implements IInvokedMethodListener {
 

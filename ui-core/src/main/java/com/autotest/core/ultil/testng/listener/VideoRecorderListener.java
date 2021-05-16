@@ -1,86 +1,93 @@
 package com.autotest.core.ultil.testng.listener;
 
+import org.monte.media.Format;
+import org.monte.media.FormatKeys;
+import org.monte.media.math.Rational;
+import org.monte.screenrecorder.ScreenRecorder;
+import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
+
+import static org.monte.media.AudioFormatKeys.EncodingKey;
+import static org.monte.media.AudioFormatKeys.FrameRateKey;
+import static org.monte.media.AudioFormatKeys.KeyFrameIntervalKey;
+import static org.monte.media.AudioFormatKeys.MediaType;
+import static org.monte.media.AudioFormatKeys.MediaTypeKey;
+import static org.monte.media.AudioFormatKeys.MimeTypeKey;
+import static org.monte.media.VideoFormatKeys.MIME_QUICKTIME;
+import static org.monte.media.VideoFormatKeys.*;
 
 public class VideoRecorderListener extends TestListenerAdapter {
 
-//    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm_ss");
-//    private final TakenResourceRegister reg = new TakenResourceRegister();
-//    private final DesktopVideoConfiguration config = new DesktopVideoConfiguration(new ReporterConfiguration());
-//    private final DesktopVideoRecorder recorder = new DesktopVideoRecorder(reg);
-//    boolean shouldRecordVideo;
-//
-//    public VideoRecorderListener() {
-//        shouldRecordVideo = Boolean.valueOf(System.getProperty("video.recording"));
-//        recorder.init(config);
-//    }
-//
-//    @Override
-//    public void onTestStart(ITestResult result) {
-//        if (!shouldRecordVideo) {
-//            System.out.println("onTestStart: not record videos");
-//            return;
-//        }
-//        // test_abc_2021_03_20_00_00_00.mp4
-//        String fileName = String.format("%s_%s",
-//                result.getMethod().getMethodName(), dateTimeFormatter.format(LocalDateTime.now()));
-//        File file = new File(result.getTestClass().getName(), fileName);
-//        try {
-//            recorder.startRecording(file);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
-//    @Override
-//    public void onTestFailure(ITestResult result) {
-//        if (!shouldRecordVideo) {
-//            System.out.println("onTestFailure: not record videos");
-//            return;
-//        }
-//        try {
-//            Video video = recorder.stopRecording();
-//            renameFailedTestVideo(video);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
-//
-//    @Override
-//    public void onTestSkipped(ITestResult result) {
-//        try {
-//            Video video = recorder.stopRecording();
-//            renameFailedTestVideo(video);
-//        } catch (IllegalStateException e) {
-//            // this exception throw if the test method depend on another method which failed
-//            // then no video recorded
-//            // but if the test skipped because an SkipException throw from inside the test, video still recorded
-//        }
-//    }
-//
-//    @Override
-//    public void onTestSuccess(ITestResult result) {
-//        if (!shouldRecordVideo) {
-//            System.out.println("onTestSuccess: not record videos");
-//            return;
-//        }
-//        try {
-//            recorder.stopRecording();
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-//
-//    private void renameFailedTestVideo(Video video) {
-//        try {
-//            Path path = video.getResource().toPath();
-//            // test_abc_2021_03_20_00_00_00_failed.mp4
-//            String newName = String.format("%s_failed.%s",
-//                    FilenameUtils.getBaseName(video.getResource().getName()), FilenameUtils.getExtension(video.getResource().getName()));
-//            Files.move(video.getResource().toPath(), path.resolveSibling(newName));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+    private static ScreenRecorder screenRecorder;
+    boolean isRecordVideo;
+    boolean isOnTestFail;
+    private final File mavenProjectBuildDirectory = new File(System.getProperty("maven.project.build.directory", "./target/"));
+    private final File videosOutputDir = new File(mavenProjectBuildDirectory, "videos/");
+    private File recordingFile;
+
+    public VideoRecorderListener() throws IOException, AWTException {
+        isRecordVideo = Boolean.parseBoolean(System.getProperty("video.recording"));
+        isOnTestFail = Boolean.parseBoolean(System.getProperty("video.onTestFail"));
+        GraphicsConfiguration gc = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice()
+                .getDefaultConfiguration();
+
+        screenRecorder = new ScreenRecorder(gc, null, new Format(MediaTypeKey, FormatKeys.MediaType.FILE, MimeTypeKey, MIME_QUICKTIME),
+                new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE,
+                        CompressorNameKey, ENCODING_AVI_TECHSMITH_SCREEN_CAPTURE, DepthKey, 24, FrameRateKey,
+                        Rational.valueOf(15), QualityKey, 1.0f, KeyFrameIntervalKey, 15 * 60),
+                new Format(MediaTypeKey, MediaType.VIDEO, EncodingKey, "black", FrameRateKey, Rational.valueOf(30)),
+                null, videosOutputDir);
+    }
+
+    @Override
+    public void onTestStart(ITestResult result) {
+        if (!isRecordVideo) {
+            return;
+        }
+
+        try {
+            screenRecorder.start();
+            recordingFile = new File(videosOutputDir, result.getMethod().getMethodName() + ".mov");
+            screenRecorder.getCreatedMovieFiles().get(0).renameTo(recordingFile);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onTestFailure(ITestResult result) {
+        try {
+            screenRecorder.stop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onTestSuccess(ITestResult result) {
+        try {
+            screenRecorder.stop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (isOnTestFail) {
+            recordingFile.delete();
+        }
+    }
+
+    @Override
+    public void onTestSkipped(ITestResult result) {
+        try {
+            screenRecorder.stop();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        recordingFile.delete();
+    }
 }

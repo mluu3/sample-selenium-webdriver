@@ -21,7 +21,7 @@
         <skipTests>false</skipTests>
         <arquillian.xml>arquillian.xml</arquillian.xml>
         <browser>firefox</browser>
-<!--        <firefoxDriverBinaryPath>/usr/bin/geckodriver</firefoxDriverBinaryPath>-->
+        <firefoxDriverBinaryPath>/usr/bin/geckodriver</firefoxDriverBinaryPath>
 
         <screenResolution>fullscreen</screenResolution>
 
@@ -31,9 +31,9 @@
         <!-- possible values are: local-firefox/local-chrome -->
         <test.execution.env>local-firefox</test.execution.env>
 
-        <coreModuleName>ui-core</coreModuleName>
-        <corePath>${moduleCorePath}</corePath>
-        <moduleCorePath>${basedir}${file.separator}..${file.separator}${coreModuleName}</moduleCorePath>
+<!--        <coreModuleName>ui-core</coreModuleName>-->
+<!--        <corePath>${moduleCorePath}</corePath>-->
+<!--        <moduleCorePath>${basedir}${file.separator}..${file.separator}${coreModuleName}</moduleCorePath>-->
 
         <testng.suite.xml>testng-basic.xml</testng.suite.xml>
 
@@ -44,7 +44,8 @@
         <version.org.arquillian.recorder>1.1.6.Final</version.org.arquillian.recorder>
         <version.org.apache.maven.surefire-plugin>2.19.1</version.org.apache.maven.surefire-plugin>
         <version.org.testng>6.9.10</version.org.testng>
-        <video.recording>false</video.recording>
+        <video.recording>true</video.recording>
+        <video.onTestFail>true</video.onTestFail>
     </properties>
 
     <dependencyManagement>
@@ -64,16 +65,16 @@
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.arquillian.extension</groupId>
-                <artifactId>arquillian-desktop-video-recorder</artifactId>
-                <version>${version.org.arquillian.recorder}</version>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
                 <type>pom</type>
+                <version>${version.org.jboss.arquillian}</version>
                 <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${version.org.jboss.arquillian}</version>
+                <groupId>org.arquillian.extension</groupId>
+                <artifactId>arquillian-desktop-video-recorder</artifactId>
+                <version>${version.org.arquillian.recorder}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -91,7 +92,6 @@
         <dependency>
             <groupId>org.jboss.arquillian.testng</groupId>
             <artifactId>arquillian-testng-standalone</artifactId>
-            <version>${version.org.jboss.arquillian}</version>
         </dependency>
         <!-- Graphene dependency chain - imports all other dependencies required -->
         <dependency>
@@ -191,10 +191,6 @@
                                                 <value>${firefoxDriverBinaryPath}</value>
                                             </property>
                                             <property>
-                                                <name>corePath</name>
-                                                <value>${corePath}</value>
-                                            </property>
-                                            <property>
                                                 <name>timeout</name>
                                                 <value>${timeout}</value>
                                             </property>
@@ -230,6 +226,7 @@
                 <property>
                     <name>test.execution.env</name>
                     <value>local-firefox</value>
+
                 </property>
             </activation>
             <properties>

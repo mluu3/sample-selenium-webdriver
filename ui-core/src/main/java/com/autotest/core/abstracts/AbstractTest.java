@@ -10,9 +10,11 @@ import org.jboss.arquillian.testng.Arquillian;
 import org.json.JSONException;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-import java.lang.reflect.Method;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -34,10 +36,10 @@ public abstract class AbstractTest extends Arquillian {
         // if rest client is not created yet or the user of current rest client and the current admin user
         // is not the same, need to create new rest client
         if (Objects.isNull(restClient)) {
-            log.info("Creating new rest client for current user: " + "luuthanhquocminh@gmail.com");
+            log.info("Creating new rest client for current user: " + "user");
             restClient = new RestClient(
                     new RestClient.RestProfile(
-                            "api.openweathermap.org", "luuthanhquocminh@gmail.com", "Minh2708"));
+                            "domain", "user", "password"));
         }
         return restClient;
     }
@@ -47,49 +49,6 @@ public abstract class AbstractTest extends Arquillian {
 
 
     //================== Window Size ======================
-
-    @BeforeSuite(groups = {"arquillian"}, inheritGroups = true)
-    @Override
-    public void arquillianBeforeSuite() throws Exception {
-        super.arquillianBeforeSuite();
-    }
-
-    /* Viet fix to force it follows Arquillian cycle */
-    // Reserve for use later
-    @AfterSuite(groups = {"arquillian"}, inheritGroups = true, alwaysRun = true)
-    @Override
-    public void arquillianAfterSuite() throws Exception {
-        super.arquillianAfterSuite();
-    }
-
-    /* Viet fix to force it follows Arquillian cycle */
-    @BeforeClass(groups = {"arquillian"}, inheritGroups = true)
-    @Override
-    public void arquillianBeforeClass() throws Exception {
-        super.arquillianBeforeClass();
-        initProperties();
-    }
-
-    /* Viet fix to force it follows Arquillian cycle */
-    @AfterClass(groups = {"arquillian"}, inheritGroups = true, alwaysRun = true)
-    @Override
-    public void arquillianAfterClass() throws Exception {
-        super.arquillianAfterClass();
-    }
-
-    /* Viet fix to force it follows Arquillian cycle */
-    @BeforeMethod(groups = {"arquillian"}, inheritGroups = true)
-    @Override
-    public void arquillianBeforeTest(Method testMethod) throws Exception {
-        super.arquillianBeforeTest(testMethod);
-    }
-
-    /* Viet fix to force it follows Arquillian cycle */
-    @AfterMethod(groups = {"arquillian"}, inheritGroups = true, alwaysRun = true)
-    @Override
-    public void arquillianAfterTest(Method testMethod) throws Exception {
-        super.arquillianAfterTest(testMethod);
-    }
 
     @Test(groups = {"createProject"})
     @Parameters({"windowSize"})

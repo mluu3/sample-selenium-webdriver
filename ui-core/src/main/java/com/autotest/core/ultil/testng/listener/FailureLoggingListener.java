@@ -18,11 +18,12 @@ import main.java.ultil.testng.TestInfo;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class FailureLoggingListener extends TestListenerAdapter {
 
-    private File mavenProjectBuildDirectory = new File(System.getProperty("maven.project.build.directory", "./target/"));
-    private File failuresOutputDir = new File(mavenProjectBuildDirectory, "failures");
+    private final File mavenProjectBuildDirectory = new File(System.getProperty("maven.project.build.directory", "./target/"));
+    private final File failuresOutputDir = new File(mavenProjectBuildDirectory, "failures");
 
     @Override
     public void onTestStart(ITestResult result) {
@@ -67,9 +68,9 @@ public class FailureLoggingListener extends TestListenerAdapter {
             File directory = imageOutputFile.getParentFile();
             FileUtils.forceMkdir(directory);
 
-            FileUtils.writeStringToFile(consoleLogOutputFile, consolelog);
-            FileUtils.writeStringToFile(stacktraceOutputFile, stacktrace);
-            FileUtils.writeStringToFile(htmlSourceOutputFile, htmlSource);
+            FileUtils.writeStringToFile(consoleLogOutputFile, consolelog, StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(stacktraceOutputFile, stacktrace, StandardCharsets.UTF_8);
+            FileUtils.writeStringToFile(htmlSourceOutputFile, htmlSource, StandardCharsets.UTF_8);
 
             File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
             FileUtils.copyFile(scrFile, imageOutputFile);

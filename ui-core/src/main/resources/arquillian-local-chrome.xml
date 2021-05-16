@@ -23,7 +23,7 @@
 
     <extension qualifier="recorder">
         <property name="rootDir">target/videos</property>
-        <property name="takeOnlyOnFail">false</property>
+        <property name="takeOnlyOnFail">true</property>
         <property name="screenshot">none</property>
     </extension>
 

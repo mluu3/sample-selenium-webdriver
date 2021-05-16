@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 public class SearchTest extends AbstractUITest {
 
     @Test
-    public void testRoleTeacher() {
+    public void testARoleTeacher() {
         initLoginPage()
                 .login("teacherpnt2@apollo.edu.vn", "apollo6543@1")
                 .selectCenter("Pham Ngoc Thach");
