@@ -6,6 +6,8 @@ import com.autotest.core.fragment.MenuNavigation;
 import com.autotest.core.fragment.MenuNavigation.Navigator;
 import com.autotest.core.fragment.TeacherGradebook;
 import com.autotest.core.fragment.TeacherGradebook.SubmitTab;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
 import java.util.stream.Collectors;
@@ -23,7 +25,7 @@ public class SearchTest extends AbstractUITest {
                 .selectCenter("Pham Ngoc Thach");
         assertEquals(MenuNavigation.getInstance(browser).listItems(), Stream.of(Navigator.values())
                 .map(Navigator::getNavigator).collect(Collectors.toList()));
-
+        browser.findElements(By.xpath("")).stream().map(WebElement::getText).collect(Collectors.toList());
         TeacherGradebook teacherGradebook = initTeacherGradebook();
         Dialog dialog = Dialog.getInstance(browser);
         waitForPageReloading();

@@ -16,6 +16,7 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 import static com.autotest.core.ultil.BrowserUtils.getCurrentBrowserAgent;
@@ -42,6 +43,7 @@ public abstract class AbstractTest extends Arquillian {
                             "domain", "user", "password"));
         }
         return restClient;
+
     }
 
     //================== Web ======================
